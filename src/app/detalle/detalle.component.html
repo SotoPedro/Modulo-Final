@@ -1,0 +1,36 @@
+<ActionBar>
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label text="Detalles"></Label>
+</ActionBar>
+
+<FlexboxLayout>  
+    <!---<PullToRefresh (refresh)="onPull($event)">-->
+    <ListView class="list-group" [items]="this.opinions"  (itemTap)="onItemTap($event)" style="height: 1250px;">
+        <ng-template let-x="item">
+            <GridLayout rows="auto,25" columns="auto,*,auto" verticalAligment="top"
+                backgroundColor="lightgray">
+                <Image src="res://icon" class="thumb img-circle" rowSpan="2" width="72" height="72" margin="3" verticalAligment="top"></Image>
+                <Label [text]="x.op" textWrap="true" col="1" colSpan="2" minHeight="50" fontSize="16" margin="3"></Label>
+                <Label [text]="'User:'+ x.name" col="1" row="1" fontSize="14" horizontalAligment="left" verticalAligment="bottom"></Label>
+                <Button text="Delete" (tap)="onDelete()"></Button>                
+                <Label [text]="'Calificación:'+ x.puntaje" col="2" row="1" color="#10C2B0" fontSize="14" verticalAligment="bottom" ></Label>                                    
+
+            </GridLayout>
+        </ng-template>
+    </ListView>  
+<!--</PullToRefresh> -->
+</FlexboxLayout>
+   
+    
