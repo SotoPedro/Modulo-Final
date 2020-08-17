@@ -12,17 +12,13 @@
     <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label text="Search"></Label>
+    <Label text="Edicion"></Label>
 </ActionBar>
 
-<GridLayout class="page__content">
-    <TextField hint="añade un producto" [text]="value"></TextField>
-    <Button text="Agregar a la db" (tap)="onAddButton()"></Button>        
-    <ListView [items]="getFavs()" (itemTap)="onItemTap(event)" class="list-group">
-        <ng-template let-item="item" let-odd="odd" let-even="even">
-          <StackLayout>
-            <Label [text]="item" class="list-group-item"></Label>            
-          </StackLayout>
-        </ng-template>
-    </ListView>
-</GridLayout>
+<StackLayout>
+    <TextField hint="ingresa el nuevo nombre de usuario" [text]="txtValue"></TextField>
+    <Button text="guardar" (tap)="onSaveItem()"></Button>
+        
+</StackLayout>
+
+

@@ -5,7 +5,7 @@ import { RouterExtensions } from 'nativescript-angular/router';
 import * as app from "tns-core-modules/application";
 import { NovedadesService } from "../domain/news.service";
 import { isIOS, isAndroid, Color, View } from 'tns-core-modules/ui/page';
-import { duration } from "nativescript-toast";
+import * as Toast from "nativescript-toast"
 
 @Component ({
     selector: "News",
@@ -32,10 +32,7 @@ export class NewsComponent implements OnInit {
     getPlataform() {       
         return isAndroid;
     }
-
-    getNews(){
-        return this.listNews.getNovedades();
-    }
+    
     onDrawerButtonTap(): void {
         const sidedrawer = <RadSideDrawer>app.getRootView();
         sidedrawer.showDrawer();
@@ -45,17 +42,24 @@ export class NewsComponent implements OnInit {
         console.dir(e);
     }
     buscarAhora(s: string) {
-        this.resultados = this.listNews.getNovedades().filter(x => x.indexOf(s) >= 0);
+        console.dir("Buscar ahora: " + s);
+        this.listNews.buscar(s).then((r: any) => {
+            console.log("Resultados: " + JSON.stringify(r));
+            this.resultados = r;
+        }, (e) => {
+            console.log("Error buscar : " + e);
+            Toast.makeText("Error en la busqueda","Long");
+        })
 
-        const layout = <View>this.layout.nativeElement;
-        layout.animate({
-            backgroundColor: new Color("blue"),
-            duration: 300,
-            delay: 150
-        }).then(() => layout.animate({
-            backgroundColor: new Color("white"),
-            duration: 300,
-            delay: 150
-        }))
+        //const layout = <View>this.layout.nativeElement;
+        //layout.animate({
+            //backgroundColor: new Color("blue"),
+            //duration: 300,
+            //delay: 150
+        //}).then(() => layout.animate({
+        //    backgroundColor: new Color("white"),
+            //duration: 300,
+            //delay: 150
+        //}))
     }
 }

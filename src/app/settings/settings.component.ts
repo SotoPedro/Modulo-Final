@@ -3,15 +3,17 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import * as Toast from "nativescript-toast";
+import * as appSettings from "tns-core-modules/application-settings";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: "Settings",
     templateUrl: "./settings.component.html"
 })
 export class SettingsComponent implements OnInit {
-
-    constructor() {
-        // Use the component constructor to inject providers.
+    nombreUsuario: string = "Luis";     
+    constructor(private router: RouterExtensions) {
+        // Use the component constructor to inject providers.        
     }
 
     doLater(fn) { setTimeout(fn,1000);}
@@ -41,10 +43,15 @@ export class SettingsComponent implements OnInit {
                 })
         });
         */
-       const toast = Toast.makeText("Hello world","long");
+       /*const toast = Toast.makeText("Hello world","long");       
        this.doLater(() => toast.show());
+       */          
+       this.nombreUsuario = appSettings.getString("NombreUsuario");
     }
-
+        
+    onEditionNavigation(): void {
+        this.router.navigate(["Edit"]);
+    }
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();

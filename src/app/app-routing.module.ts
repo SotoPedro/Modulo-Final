@@ -13,7 +13,8 @@ const routes: Routes = [
     { path: "news", loadChildren: () => import("~/app/news/news.module").then((m) => m.NewsModule) },    
     { path: "info", loadChildren: () => import("~/app/info/info.module").then((m) => m.InfoModule) },
     { path: "listado", loadChildren: () => import("~/app/listado/listado.module").then((m) => m.ListadoModule) },
-    { path: "detalle/:name", loadChildren: () => import("~/app/detalle/detalle.module").then((m) => m.DetalleModule)}
+    { path: "detalle/:name", loadChildren: () => import("~/app/detalle/detalle.module").then((m) => m.DetalleModule)},
+    { path: "Edit", loadChildren: () => import("~/app/edit/edit.module").then((m) => m.EditModule)}
 ];
 
 @NgModule({
