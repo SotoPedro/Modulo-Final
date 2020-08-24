@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store";
 import { AppState } from "../app.module";
 import * as Toast from "nativescript-toast";
 import { NuevaNoticiaAction, Noticia } from "../domain/noticias-state.model";
+import * as SocialShare from "nativescript-social-share";
 
 @Component({
     selector: "Search",
@@ -31,6 +32,7 @@ export class SearchComponent implements OnInit {
     }
     onItemTap(args): void {
         this.store.dispatch(new NuevaNoticiaAction(new Noticia(args.view.bindinContext))); //nos sirve para ejecutar una nueva acción
+        SocialShare.shareText("hola");
     }
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
